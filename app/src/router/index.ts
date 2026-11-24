@@ -25,14 +25,24 @@ const router = createRouter({ history: createWebHistory(import.meta.env.BASE_URL
 
 /**
  * TODO [M3] Guarda de navegación (4 pts).
- *  1. Antes de cada navegación, asegúrese de haber cargado la sesión guardada: await cargarToken().
- *  2. Si alguna ruta del destino tiene meta.requiereSesion y no hay sesión → redirigir a /login.
- *  3. Si el destino tiene meta.soloInvitados y ya hay sesión → redirigir a /tabs/equipos.
- *  Use to.matched para revisar también la ruta padre (/tabs/).
  */
 router.beforeEach(async (to) => {
-  void [to, useAuth];
-  // TODO [M3]
+  const { estaAutenticado, cargarToken } = useAuth();
+
+  // 1. Restaurar la sesión guardada en SecureStorage (solo se lee una vez gracias a tokenCargado)
+  await cargarToken();
+
+  // 2. Verificar si la ruta o alguno de sus padres (ej. /tabs/) requiere sesión
+  const requiereSesion = to.matched.some((ruta) => ruta.meta.requiereSesion);
+  if (requiereSesion && !estaAutenticado.value) {
+    return '/login';
+  }
+
+  // 3. Evitar que usuarios ya autenticados entren a rutas solo para invitados (/login)
+  const soloInvitados = to.matched.some((ruta) => ruta.meta.soloInvitados);
+  if (soloInvitados && estaAutenticado.value) {
+    return '/tabs/equipos';
+  }
 });
 
 export default router;
