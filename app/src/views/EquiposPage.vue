@@ -118,7 +118,7 @@ async function cargar(reiniciar = false) {
     ultimaPagina.value = respuesta.meta.last_page;
   } catch (err) {
     if (err instanceof ErrorApi && err.status === 401) return;
-    error.value = err instanceof ErrorApi ? err.mensaje : 'No fue posible cargar los equipos.';
+    error.value = err instanceof ErrorApi ? err.message : 'No fue posible cargar los equipos.';
   } finally {
     cargando.value = false;
   }
@@ -169,12 +169,12 @@ async function confirmarEliminacion(equipo: Equipo, evento: Event) {
   } catch (err) {
     if (err instanceof ErrorApi) {
       if (err.status === 409) {
-        await mostrarToast(err.mensaje || 'No se puede eliminar un equipo prestado.', 'warning');
+        await mostrarToast(err.message || 'No se puede eliminar un equipo prestado.', 'warning');
       } else if (err.status === 404) {
         equipos.value = equipos.value.filter((item) => item.id !== equipo.id);
         await mostrarToast('El equipo ya no existe.', 'medium');
       } else if (err.status !== 401) {
-        await mostrarToast(err.mensaje || 'Error al eliminar el equipo.', 'danger');
+        await mostrarToast(err.message || 'Error al eliminar el equipo.', 'danger');
       }
     }
   }

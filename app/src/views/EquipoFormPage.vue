@@ -124,7 +124,7 @@ onIonViewWillEnter(async () => {
         ionRouter.replace('/tabs/equipos');
         return;
       }
-      await mostrarToast(err.mensaje || 'No fue posible cargar los datos del formulario.', 'danger');
+      await mostrarToast(err.message || 'No fue posible cargar los datos del formulario.', 'danger');
     }
   }
 });
@@ -174,7 +174,7 @@ async function guardar() {
         await mostrarToast('El equipo ya no existe.', 'warning');
         ionRouter.replace('/tabs/equipos');
       } else {
-        await mostrarToast(err.mensaje || 'No fue posible guardar el equipo.', 'danger');
+        await mostrarToast(err.message || 'No fue posible guardar el equipo.', 'danger');
       }
     } else {
       await mostrarToast('Ocurrió un error inesperado al guardar.', 'danger');
