@@ -57,10 +57,11 @@ Cada comentario `TODO` describe exactamente lo que se espera. Los archivos marca
 Guarde en `app/docs/evidencia-android.png` una captura de **su** app corriendo en el emulador,
 en la pestaña **Perfil** (debe verse *Plataforma: android*), y complete:
 
-- Carné:
-- appId:
+- Carné: C5K908
+- appId: cr.ac.ucr.if0009.c5k908
 - Versión de Node / Ionic CLI / Capacitor (`node -v`, `ionic -v`, `npx cap -V`):
-- ¿Se generó el APK de depuración? (sí/no):
+- v22.23.2 , 7.2.1 , 8.6.2
+- ¿Se generó el APK de depuración? (sí/no): Sipidipi
 
 ## Reglas
 
